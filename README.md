@@ -28,16 +28,16 @@ No one should have to choose between bankruptcy or death.
 
 Campaign providers such as [Wasti](https://watsi.org/),
 [GiveForward](http://www.giveforward.com/), [GoFundMe](http://www.gofundme.com/),
-and [Indiegogo](http://www.indiegogo.com/) are providing a vital service for
+and [Indiegogo](http://www.indiegogo.com/) are providing a vital service by
 allowing people to create funding campaigns to help pay for medical treatments.
 Oftentimes, however, the people contributing to those campaigns are limited to
 friends, family, and other people specifically browsing the platform looking to
 make donations. While this is amazing in and of itself, many campaigns never
 reach their goal.
 
-Humanity Box's aim is to increase exposure to these campaigns across the entire
-internet. We hope that by simply increasing traffic to these campaigns that
-we can help get them funded when they otherwise might not.
+Humanity Box's aim is to bring exposure to these campaigns to as many sites on
+the internet as possible. We hope that by simply increasing traffic to these
+campaigns we can help them get funded when they otherwise might not.
 
 How does it work?
 -----------------
