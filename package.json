@@ -1,0 +1,23 @@
+{
+  "title": "Humanity Box",
+  "author": "Humanity Box",
+  "name": "humanitybox",
+  "homepage": "http://humanitybox.com/",
+  "description": "The Humanity Box platform.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nicksergeant/humanitybox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nicksergeant/humanitybox/issues"
+  },
+  "licenses": [],
+  "engines": {
+    "node": ">= 0.8.4"
+  },
+  "dependencies": {
+    "ejs": "~0.8",
+    "express": "~3.0"
+  }
+}
