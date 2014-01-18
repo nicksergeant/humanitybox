@@ -1,1 +1,93 @@
 /* Module styles */
+
+// Header
+header {
+	background: #f2f2f2 url(../img/bg_header.jpg) center top no-repeat;
+	background-size: cover;
+	color: #fff;
+	padding: 30px 0 40px 0;
+	position: fixed; 
+	top: 0;
+	width: 100%;
+	z-index: 0;
+	h2 {
+		color: #fff;
+		font: {
+			size: em(32px);
+			weight: 300;
+		}
+		line-height: 1.35em;
+		padding-bottom: 0.5em;
+		text-shadow: 0 2px 0 rgba(0,0,0, 0.2);
+	}
+	p {
+		font-size: em(12px);
+		margin-top: 0;
+		a {
+			margin-left: 10px;
+		}
+	}
+	@include breakpoint(mobile-portrait) {
+		h2 {
+			font-size: em(24px);
+			text-align: center;
+		}
+		p {
+			display: none;
+		}
+		.button {
+			display: block;
+			margin: 0 auto;
+			max-width: 60%;
+
+		}
+	}
+}
+.header__logo {
+	background: url(../img/logo.png) center top no-repeat;
+	background-size: 100%;
+	height: 100px;
+	margin: 0;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	width: 100px;
+	@include breakpoint(mobile-portrait) {
+		background-size: 110px;
+		height: 110px;
+		width: 100%;
+	}
+}
+
+.layer {
+	background-color: #f2f2f2;
+	min-height: 300px;
+	padding: 30px 0;
+	position: relative;
+	z-index: 1;
+}
+
+// Buttons
+.button {
+	background-color: #ddd;
+	border-bottom: 2px solid darken(#ddd, 25);
+	color: #555;
+	display: inline-block;
+	padding: 0.75em 1.25em;
+	text-align: center;
+	text-decoration: none;
+	&:hover {
+		background-color: lighten(#ddd, 8);
+	}
+	&.-small {
+		font-size: em(12px);
+	}
+	&.-blue {
+		background-color: $blue;
+		border-bottom: 2px solid darken($blue, 25);
+		color: #fff;
+		&:hover {
+			background-color: lighten($blue, 3);
+		}
+	}
+}
