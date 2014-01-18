@@ -80,9 +80,9 @@ h1, h2, h3 {
 	font-family: 'Museo Slab', 'Open Sans', sans-serif;
 }
 h2 {
-	font-size: em(32px);
+	font-size: em(36px);
 	@include breakpoint(mobile-portrait) {
-		font-size: em(24px);
+		font-size: em(28px);
 	}
 }
 h3 {

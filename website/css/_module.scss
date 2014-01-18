@@ -97,6 +97,54 @@ header {
 		text-align: center;
 	}
 }
+.get-started__process {
+	position: relative;
+	&:after {
+		border-top: 8px dashed rgba(#fff, 0.2);
+		content: "";
+		display: block;
+		margin-left: 115px;
+		position: absolute;
+		top: 190px;
+		width: 75%;
+		z-index: 1;
+	}
+	@include breakpoint(mobile-portrait) {
+			&:after {
+				border: {
+					top: none;
+					left: 8px dashed rgba(#fff, 0.2);
+				}
+				height: 70%;
+				left: 32px;
+				top: 120px;
+				width: 8px;
+			}
+		}
+		@include breakpoint(mobile-landscape) {
+			&:after {
+				height: 61%;
+				left: 92px;
+			}
+		}
+}
+.get-started__step {
+	color: #fff;
+	padding-top: 15px;
+	position: relative;
+	text-align: center;
+	z-index: 2;
+	img {
+		padding-bottom: 10px;
+	}
+	@include breakpoint(mobile-portrait) {
+		padding-top: 40px;
+		&:first-child {
+			padding-top: 20px;
+		}
+	}
+
+}
 .existence {
 	background-color: $blue;
 	h2, p {
