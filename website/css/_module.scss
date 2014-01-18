@@ -67,6 +67,11 @@ header {
 	padding: 30px 0;
 	position: relative;
 	z-index: 1;
+	@include breakpoint(mobile-portrait) {
+		h2 {
+			text-align: center;
+		}
+	}
 }
 .get-started {
 	background-color: $green;
@@ -85,10 +90,48 @@ header {
 // Footer 
 footer {
 	background-color: $darkGray;
-	min-height: 100px;
-	padding: 30px 0;
+	padding: 30px 0 20px 0;
 	position: relative;
 	z-index: 1;
+	ul {
+		margin-top: 20px;
+		text-align: center;
+		li {
+			color: #ddd;
+			font-size: em(14px);
+			display: inline-block;
+			padding: 5px;
+			a {
+				color: #ddd;
+				text-decoration: underline;
+			}
+		}
+	}
+	@include breakpoint(mobile-portrait) {
+		ul {
+			padding-top: 10px;
+			li {
+				font-size: em(12px);
+			}
+		}
+	}
+}
+.footer__logo {
+	display: block;
+	margin: {
+		top: -75px;
+		right: auto;
+		left: auto;
+	}
+	width: 90px;
+	@include breakpoint(mobile-portrait) {
+		margin-top: -60px;
+		width: 65px;
+	}
+	@include breakpoint(tablet-portrait) {
+		margin-top: -65px;
+		width: 75px;
+	}
 }
 
 // Buttons

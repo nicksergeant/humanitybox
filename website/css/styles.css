@@ -42,6 +42,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
+  line-height: 1.35em;
   margin: 1em 0; }
 
 h1, h2, h3 {
@@ -50,9 +51,15 @@ h1, h2, h3 {
 
 h2 {
   font-size: 2em; }
+  @media only screen and (max-width: 767px) {
+    h2 {
+      font-size: 1.5em; } }
 
 h3 {
   font-size: 1.5em; }
+  @media only screen and (max-width: 767px) {
+    h3 {
+      font-size: 1.125em; } }
 
 p {
   font-size: 1.125em;
@@ -127,6 +134,9 @@ header {
   padding: 30px 0;
   position: relative;
   z-index: 1; }
+  @media only screen and (max-width: 767px) {
+    .layer h2 {
+      text-align: center; } }
 
 .get-started {
   background-color: #71c594; }
@@ -141,10 +151,40 @@ header {
 
 footer {
   background-color: #414f56;
-  min-height: 100px;
-  padding: 30px 0;
+  padding: 30px 0 20px 0;
   position: relative;
   z-index: 1; }
+  footer ul {
+    margin-top: 20px;
+    text-align: center; }
+    footer ul li {
+      color: #ddd;
+      font-size: 0.875em;
+      display: inline-block;
+      padding: 5px; }
+      footer ul li a {
+        color: #ddd;
+        text-decoration: underline; }
+  @media only screen and (max-width: 767px) {
+    footer ul {
+      padding-top: 10px; }
+      footer ul li {
+        font-size: 0.75em; } }
+
+.footer__logo {
+  display: block;
+  margin-top: -75px;
+  margin-right: auto;
+  margin-left: auto;
+  width: 90px; }
+  @media only screen and (max-width: 767px) {
+    .footer__logo {
+      margin-top: -60px;
+      width: 65px; } }
+  @media only screen and (min-width: 768px) and (max-width: 959px) {
+    .footer__logo {
+      margin-top: -65px;
+      width: 75px; } }
 
 .button {
   background-color: #ddd;

@@ -72,6 +72,7 @@ body {
 }
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
+	line-height: 1.35em;
 	margin: 1em 0;
 }
 h1, h2, h3 {
@@ -80,9 +81,15 @@ h1, h2, h3 {
 }
 h2 {
 	font-size: em(32px);
+	@include breakpoint(mobile-portrait) {
+		font-size: em(24px);
+	}
 }
 h3 {
 	font-size: em(24px);
+	@include breakpoint(mobile-portrait) {
+		font-size: em(18px);
+	}
 }
 p {
 	font-size: em(18px);
