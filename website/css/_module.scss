@@ -13,6 +13,7 @@ header {
 	h2 {
 		color: #fff;
 		font: {
+			family: 'Open Sans', sans-serif;
 			size: em(32px);
 			weight: 300;
 		}
@@ -59,9 +60,32 @@ header {
 	}
 }
 
+// Layer modules
 .layer {
 	background-color: #f2f2f2;
 	min-height: 300px;
+	padding: 30px 0;
+	position: relative;
+	z-index: 1;
+}
+.get-started {
+	background-color: $green;
+	h2 {
+		color: #fff;
+		text-align: center;
+	}
+}
+.existence {
+	background-color: $blue;
+	h2, p {
+		color: #fff;
+	}
+}
+
+// Footer 
+footer {
+	background-color: $darkGray;
+	min-height: 100px;
 	padding: 30px 0;
 	position: relative;
 	z-index: 1;
@@ -81,6 +105,10 @@ header {
 	}
 	&.-small {
 		font-size: em(12px);
+	}
+	&.-large {
+		font-size: em(18px);
+		padding: 1em 1.5em;
 	}
 	&.-blue {
 		background-color: $blue;

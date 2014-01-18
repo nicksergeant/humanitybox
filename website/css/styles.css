@@ -37,17 +37,33 @@ table {
   border-spacing: 0; }
 
 body {
+  color: #444;
   font-family: 'Open Sans', sans-serif; }
 
 h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
   margin: 1em 0; }
 
 h1, h2, h3 {
   color: #71c594;
   font-family: 'Museo Slab', 'Open Sans', sans-serif; }
+
+h2 {
+  font-size: 2em; }
+
+h3 {
+  font-size: 1.5em; }
+
 p {
+  font-size: 1.125em;
   line-height: 1.5em;
   margin: 1em 0; }
+
+a {
+  color: #6fb7e7;
+  text-decoration: none; }
+  a:hover {
+    color: #8ec6ec; }
 
 .left {
   float: left; }
@@ -68,6 +84,7 @@ header {
   z-index: 0; }
   header h2 {
     color: #fff;
+    font-family: 'Open Sans', sans-serif;
     font-size: 2em;
     font-weight: 300;
     line-height: 1.35em;
@@ -111,6 +128,24 @@ header {
   position: relative;
   z-index: 1; }
 
+.get-started {
+  background-color: #71c594; }
+  .get-started h2 {
+    color: #fff;
+    text-align: center; }
+
+.existence {
+  background-color: #6fb7e7; }
+  .existence h2, .existence p {
+    color: #fff; }
+
+footer {
+  background-color: #414f56;
+  min-height: 100px;
+  padding: 30px 0;
+  position: relative;
+  z-index: 1; }
+
 .button {
   background-color: #ddd;
   border-bottom: 2px solid #9d9d9d;
@@ -123,6 +158,9 @@ header {
     background-color: #f1f1f1; }
   .button.-small {
     font-size: 0.75em; }
+  .button.-large {
+    font-size: 1.125em;
+    padding: 1em 1.5em; }
   .button.-blue {
     background-color: #6fb7e7;
     border-bottom: 2px solid #1f7bb8;

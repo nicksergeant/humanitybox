@@ -2,6 +2,8 @@
 
 // Colors
 $blue: #6fb7e7;
+$green: #71c594;
+$darkGray: #414f56;
 
 // Media queries
 @mixin breakpoint($point) {
@@ -65,18 +67,34 @@ table {
 
 // Base
 body {
+	color: #444;
 	font-family: 'Open Sans', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
-	 margin: 1em 0;
+	font-weight: normal;
+	margin: 1em 0;
+}
 h1, h2, h3 {
 	color: $green;
 	font-family: 'Museo Slab', 'Open Sans', sans-serif;
 }
+h2 {
+	font-size: em(32px);
+}
+h3 {
+	font-size: em(24px);
 }
 p {
+	font-size: em(18px);
 	line-height: 1.5em;
 	margin: 1em 0;
+}
+a {
+	color: $blue;
+	text-decoration: none;
+	&:hover {
+		color: lighten($blue, 7);
+	}
 }
 
 // Helpers 
