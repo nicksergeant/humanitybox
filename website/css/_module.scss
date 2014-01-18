@@ -64,7 +64,7 @@ header {
 .layer {
 	background-color: #fafafa;
 	min-height: 300px;
-	padding: 30px 0;
+	padding: 10px 0 30px 0;
 	position: relative;
 	z-index: 1;
 	@include breakpoint(mobile-portrait) {
@@ -147,8 +147,13 @@ header {
 }
 .existence {
 	background-color: $blue;
+	padding-bottom: 115px;
 	h2, p {
 		color: #fff;
+	}
+	a {
+		color: #fff;
+		text-decoration: underline;
 	}
 }
 

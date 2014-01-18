@@ -131,7 +131,7 @@ header {
 .layer {
   background-color: #fafafa;
   min-height: 300px;
-  padding: 30px 0;
+  padding: 10px 0 30px 0;
   position: relative;
   z-index: 1; }
   @media only screen and (max-width: 767px) {
@@ -197,9 +197,13 @@ header {
         padding-top: 20px; } }
 
 .existence {
-  background-color: #6fb7e7; }
+  background-color: #6fb7e7;
+  padding-bottom: 115px; }
   .existence h2, .existence p {
     color: #fff; }
+  .existence a {
+    color: #fff;
+    text-decoration: underline; }
 
 footer {
   background-color: #414f56;
