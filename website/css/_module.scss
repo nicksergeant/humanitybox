@@ -18,7 +18,7 @@ header {
 			weight: 300;
 		}
 		line-height: 1.35em;
-		padding-bottom: 0.5em;
+		padding-bottom: 0.35em;
 		text-shadow: 0 2px 0 rgba(0,0,0, 0.2);
 	}
 	p {
@@ -27,6 +27,9 @@ header {
 		a {
 			margin-left: 10px;
 		}
+	}
+	.button.-large {
+		margin-bottom: 20px;
 	}
 	@include breakpoint(mobile-portrait) {
 		h2 {

@@ -95,13 +95,15 @@ header {
     font-size: 2em;
     font-weight: 300;
     line-height: 1.35em;
-    padding-bottom: 0.5em;
+    padding-bottom: 0.35em;
     text-shadow: 0 2px 0 rgba(0, 0, 0, 0.2); }
   header p {
     font-size: 0.75em;
     margin-top: 0; }
     header p a {
       margin-left: 10px; }
+  header .button.-large {
+    margin-bottom: 20px; }
   @media only screen and (max-width: 767px) {
     header h2 {
       font-size: 1.5em;
