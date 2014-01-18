@@ -100,7 +100,7 @@ header {
 .get-started__process {
 	position: relative;
 	&:after {
-		border-top: 8px dashed rgba(#fff, 0.2);
+		border-top: 8px dashed rgba(#fff, 0.18);
 		content: "";
 		display: block;
 		margin-left: 115px;
@@ -113,7 +113,7 @@ header {
 			&:after {
 				border: {
 					top: none;
-					left: 8px dashed rgba(#fff, 0.2);
+					left: 8px dashed rgba(#fff, 0.18);
 				}
 				height: 70%;
 				left: 32px;
@@ -144,6 +144,40 @@ header {
 		}
 	}
 
+}
+.installation {
+	ol {
+		padding: {
+			bottom: 30px;
+			left: 30px;
+		}
+		li {
+			font-size: em(21px);
+			margin-top: 30px;
+			padding-left: 50px;
+			position: relative;
+			&:first-child {
+				margin-top: 10px;
+			}
+		}
+		b {
+			color: $green;
+			float: left;
+			font: {
+				family: 'Museo Slab', 'Open Sans', sans-serif;
+				size: em(32px, 21px);
+			}
+			position: absolute;
+			left: 0;
+		}
+		@include breakpoint(mobile-portrait) {
+			padding-left: 0;
+			li {
+				font-size: em(18px);
+				padding-left: 35px;
+			}
+		}
+	}
 }
 .existence {
 	background-color: $blue;

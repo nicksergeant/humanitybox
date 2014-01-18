@@ -61,7 +61,7 @@ h3 {
     h3 {
       font-size: 1.125em; } }
 
-p {
+p, li {
   font-size: 1.125em;
   line-height: 1.5em;
   margin: 1em 0; }
@@ -161,7 +161,7 @@ header {
 .get-started__process {
   position: relative; }
   .get-started__process:after {
-    border-top: 8px dashed rgba(255, 255, 255, 0.2);
+    border-top: 8px dashed rgba(255, 255, 255, 0.18);
     content: "";
     display: block;
     margin-left: 115px;
@@ -172,7 +172,7 @@ header {
   @media only screen and (max-width: 767px) {
     .get-started__process:after {
       border-top: none;
-      border-left: 8px dashed rgba(255, 255, 255, 0.2);
+      border-left: 8px dashed rgba(255, 255, 255, 0.18);
       height: 70%;
       left: 32px;
       top: 120px;
@@ -195,6 +195,30 @@ header {
       padding-top: 40px; }
       .get-started__step:first-child {
         padding-top: 20px; } }
+
+.installation ol {
+  padding-bottom: 30px;
+  padding-left: 30px; }
+  .installation ol li {
+    font-size: 1.3125em;
+    margin-top: 30px;
+    padding-left: 50px;
+    position: relative; }
+    .installation ol li:first-child {
+      margin-top: 10px; }
+  .installation ol b {
+    color: #71c594;
+    float: left;
+    font-family: 'Museo Slab', 'Open Sans', sans-serif;
+    font-size: 1.52381em;
+    position: absolute;
+    left: 0; }
+  @media only screen and (max-width: 767px) {
+    .installation ol {
+      padding-left: 0; }
+      .installation ol li {
+        font-size: 1.125em;
+        padding-left: 35px; } }
 
 .existence {
   background-color: #6fb7e7;
