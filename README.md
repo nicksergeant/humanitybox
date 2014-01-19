@@ -14,9 +14,7 @@ and it delivers advertisements on each page load.
 
 The difference is that ads in the Humanity Box network are funding campaigns
 for people are who sick and experiencing financial hardship as a result. The
-campaigns are sourced from providers such as [Wasti](https://watsi.org/),
-[GiveForward](http://www.giveforward.com/), [GoFundMe](http://www.gofundme.com/),
-and [Indiegogo](http://www.indiegogo.com/).
+campaigns are sourced from [GiveForward](http://www.giveforward.com/).
 
 The ads link directly to the sourced campaign. No money ever changes hands
 with Humanity Box. It is simply an experimental project for the sake of being
@@ -27,13 +25,12 @@ Why does it exist?
 
 No one should have to choose between bankruptcy or death.
 
-Campaign providers such as [Wasti](https://watsi.org/),
-[GiveForward](http://www.giveforward.com/), [GoFundMe](http://www.gofundme.com/),
-and [Indiegogo](http://www.indiegogo.com/) are providing a vital service by
-allowing people to create funding campaigns to help pay for medical treatments.
-Oftentimes, however, the campaigns never reach beyond friends, family, and
-other people specifically browsing the platform looking to make donations.
-While this is amazing in and of itself, many campaigns never reach their goal.
+Campaign providers such as [GiveForward](http://www.giveforward.com/) are
+providing a vital service by allowing people to create funding campaigns to
+help pay for medical treatments.  Oftentimes, however, the campaigns never
+reach beyond friends, family, and other people specifically browsing the
+platform looking to make donations.  While this is amazing in and of itself,
+many campaigns never reach their goal.
 
 Humanity Box's aim is to bring exposure to these campaigns to as many sites on
 the internet as possible. We hope that by simply increasing traffic to these
@@ -44,12 +41,7 @@ How does it work?
 
 *Note: We are still working on the implementation details of this service.*
 
-We will source funding campaigns from the following sites:
-
-- [Wasti](https://watsi.org/)
-- [GiveForward](http://www.giveforward.com/)
-- [GoFundMe](http://www.gofundme.com/)
-- [Indiegogo](http://www.indiegogo.com/)
+We will source funding campaigns from [GiveForward](http://www.giveforward.com/).
 
 The ad code will be asynchronously loaded and all assets will be delivered via
 [Amazon CloudFront](http://aws.amazon.com/cloudfront/).
