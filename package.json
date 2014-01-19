@@ -18,6 +18,9 @@
   },
   "dependencies": {
     "ejs": "~0.8",
-    "express": "~3.0"
+    "express": "~3.0",
+    "gulp": "3.3.4",
+    "request": "2.33.0",
+    "knox": "0.8.8"
   }
 }
