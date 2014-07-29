@@ -24,5 +24,6 @@ s3.putFile(__dirname + '/../../humanitybox.js', '/humanitybox.js', headers, func
   cf.createInvalidation(process.env.CF_DISTRIBUTION, uuid.v4(), '/humanitybox.js', function(err, invalidation) {
     if (err) throw err;
     console.log('Old JS invalidated.');
+    process.exit();
   });
 });
