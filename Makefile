@@ -5,6 +5,6 @@ deploy:
 	@node scripts/make/deploy-to-s3.js
 
 reset:
-	@node scripts/make/reset-campaigns.js
+	@echo > campaigns-shown.csv
 
 .PHONY: build deploy reset
