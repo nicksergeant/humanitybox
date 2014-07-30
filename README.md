@@ -39,23 +39,9 @@ campaigns we can help them get funded when they otherwise might not.
 How does it work?
 -----------------
 
-*Note: We are still working on the implementation details of this service.*
+We source funding campaigns from [GiveForward](http://www.giveforward.com/).
 
-We will source funding campaigns from [GiveForward](http://www.giveforward.com/).
+The ad code is delivered via [Amazon CloudFront](http://aws.amazon.com/cloudfront/).
 
-The ad code will be asynchronously loaded and all assets will be delivered via
-[Amazon CloudFront](http://aws.amazon.com/cloudfront/).
-
-At the start, we will simply randomize campaigns on each page load, but the
-goal is to be smarter about ensuring campaigns get distributed evenly.
-
-Want to help?
--------------
-
-Our greatest need right now is design related. If you know someone interested
-in helping us build out a brand and marketing site, let us know
-[here](https://github.com/nicksergeant/humanitybox/issues/1).
-
-Code-wise, pull requests are encouraged. Check the
-[open issues](https://github.com/nicksergeant/humanitybox/issues) to see what
-we need help with.
+We display 10 campaigns per 24-hour period, after which we rotate in 10 new
+campaigns.
