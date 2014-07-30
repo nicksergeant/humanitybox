@@ -73,7 +73,7 @@ sequence.then(function(next) {
     campaigns: JSON.stringify(processedCampaigns),
     css: css
   });
-  fs.writeFileSync(__dirname + '/../../embed/humanitybox.js', js);
+  fs.writeFileSync(__dirname + '/../../embed/humanitybox.js', js, { flag: 'w+' });
   next();
 });
 
