@@ -5,11 +5,11 @@
   var html = "<style><%- css %></style>";
   html += '<a class="humanitybox" href="' + campaign.url + '">';
   html += '  <span class="humanitybox-title">' + campaign.title + '</span>';
-  html += '  <img src="' + campaign.image_url + '" />';
+  html += '  <span class="humanitybox-img-container"><img src="' + campaign.image_url + '" /></span>';
   html += '  <span class="humanitybox-blurb">' + campaign.blurb + '</span>';
   html += '</a>';
   html += '<a class="humanitybox-link" href="http://humanitybox.com/">';
-  html += '  <img src="http://humanitybox.com/favicon.ico" /> Humanity Box'
+  html += '  <img src="http://humanitybox.com/favicon.ico" /> <span>Humanity Box</span>'
   html += '</a>';
   document.write(html);
 }(document));

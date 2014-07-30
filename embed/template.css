@@ -1,20 +1,24 @@
 a.humanitybox {
   background: white;
-  border: 3px solid white;
   border-radius: 5px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   color: #1D1D1D;
   display: block;
+  font-family: Helvetica;
   padding: 10px;
 }
 a.humanitybox:hover {
-  border-color: #6EC8CC;
   text-decoration: none;
+}
+a.humanitybox span.humanitybox-img-container {
+  display: block;
+  text-align: center;
 }
 a.humanitybox img {
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 11px;
+  max-height: 100px;
 }
 span.humanitybox-title {
   border-bottom: 1px solid #DDD;
@@ -22,18 +26,51 @@ span.humanitybox-title {
   display: block;
   font-size: 14px;
   font-weight: bold;
-  line-height: 16px;
-  margin-bottom: 10px;
+  line-height: 18px;
+  margin-bottom: 14px;
   margin-top: 0;
   overflow: hidden;
   padding-bottom: 10px;
   text-align: center;
   text-overflow: ellipsis;
 }
+a.humanitybox:hover span.humanitybox-title {
+  color: #44989C;
+}
 span.humanitybox-blurb {
+  border-bottom: 1px solid #DDD;
   color: #6F6F6F;
   display: block;
   font-size: 11px;
   font-weight: bold;
   line-height: 14px;
+  padding: 1px 0 12px 0;
+  text-align: center;
+}
+a.humanitybox-link {
+  background: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: #6F6F6F;
+  display: block;
+  font: bold 11px Helvetica;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 10px;
+  padding-top: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+a.humanitybox-link span, a.humanitybox-link img {
+  opacity: .6;
+}
+a.humanitybox-link:hover span, a.humanitybox-link:hover img {
+  opacity: 1;
+}
+a.humanitybox-link img {
+  margin-right: 5px;
+  vertical-align: -4px;
+  width: 16px;
 }
