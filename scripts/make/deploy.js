@@ -18,7 +18,7 @@ var headers = {
   'x-amz-acl': 'public-read'
 };
 
-s3.putFile(__dirname + '/tmp/humanitybox.js', '/humanitybox.js', headers, function(err, res) {
+s3.putFile('/tmp/humanitybox.js', '/humanitybox.js', headers, function(err, res) {
   if (err) throw err;
   console.log('File uploaded to S3.');
   cf.createInvalidation(process.env.CF_DISTRIBUTION, uuid.v4(), '/humanitybox.js', function(err, invalidation) {
