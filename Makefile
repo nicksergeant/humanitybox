@@ -1,10 +1,7 @@
 build:
 	@node scripts/make/build.js
 
-deploy:
-	@node scripts/make/deploy.js
-
 reset:
-	@echo > campaigns-shown.csv
+	@node scripts/make/reset.js
 
-.PHONY: build deploy reset
+.PHONY: build reset

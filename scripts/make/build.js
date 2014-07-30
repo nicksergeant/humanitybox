@@ -1,18 +1,25 @@
 'use strict';
 
+var cloudfront = require('cloudfront');
+var ejs = require('ejs');
 var fs = require('fs');
 var futures = require('futures');
+var knox = require('knox');
 var request = require('request');
-var ejs = require('ejs');
+var uuid = require('node-uuid');
+
+var cf = cloudfront.createClient(process.env.AWS_KEY, process.env.AWS_SECRET);
+var s3 = knox.createClient({
+  key: process.env.AWS_KEY,
+  secret: process.env.AWS_SECRET,
+  bucket: process.env.S3_BUCKET
+});
 
 process.on('uncaughtException', function (error) {
   console.log(error.stack);
 });
 
-var existingCampaigns = fs.readFileSync(__dirname + '/../../campaigns-shown.csv', { flag: 'a+' })
-  .toString()
-  .trim()
-  .split(',');
+var existingCampaigns = [];
 var newCampaigns = [];
 var processedCampaigns = [];
 
@@ -45,6 +52,18 @@ var getCampaigns = function(page, next) {
 var sequence = futures.sequence();
 
 sequence.then(function(next) {
+  s3.get('/campaigns-shown.csv').on('response', function(res) {
+    res.setEncoding('utf8');
+    res.on('data', function(chunk) {
+      existingCampaigns = chunk.trim().split(',');
+    });
+    res.on('end', function() {
+      next();
+    });
+  }).end();
+});
+
+sequence.then(function(next) {
   getCampaigns(1, next);
 });
 
@@ -73,15 +92,37 @@ sequence.then(function(next) {
     campaigns: JSON.stringify(processedCampaigns),
     css: css
   });
-  fs.writeFileSync('/app/tmp/humanitybox.js', js, { flag: 'w+' });
-  next();
+
+  return next(js);
+});
+
+sequence.then(function(next, js) {
+  var buffer = new Buffer(js);
+  var headers = {
+    'Content-Type': 'application/json',
+    'x-amz-acl': 'public-read'
+  };
+  s3.putBuffer(buffer, '/humanitybox.js', headers, function(err, res) {
+    console.log('- humanitybox.js uploaded to S3.');
+    next();
+  });
 });
 
 sequence.then(function(next) {
-  fs.writeFileSync('/app/tmp/campaigns-shown.csv', existingCampaigns.join(','));
+  var buffer = new Buffer(existingCampaigns.join(','));
+  var headers = {
+    'Content-Type': 'text/plain'
+  };
+  s3.putBuffer(buffer, '/campaigns-shown.csv', headers, function(err, res) {
+    console.log('- campaigns-shown.csv uploaded to S3.');
+    next();
+  });
 });
 
 sequence.then(function(next) {
-  console.log('Done.');
-  process.exit();
+  cf.createInvalidation(process.env.CF_DISTRIBUTION, uuid.v4(), '/humanitybox.js', function(err, invalidation) {
+    if (err) throw err;
+    console.log('- Old humanitybox.js invalidated.');
+    process.exit();
+  });
 });
