@@ -34,6 +34,7 @@ var getCampaigns = function(page, next) {
 
       if (existingCampaigns.indexOf(campaign.uuid) === -1 &&
           campaign.status === 'active' &&
+          campaign.donation_count !== '0' &&
           newCampaigns.length < 10) {
         newCampaigns.push(campaign);
         existingCampaigns.push(campaign.uuid);
