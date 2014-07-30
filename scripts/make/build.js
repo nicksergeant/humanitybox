@@ -73,12 +73,12 @@ sequence.then(function(next) {
     campaigns: JSON.stringify(processedCampaigns),
     css: css
   });
-  fs.writeFileSync('/tmp/humanitybox.js', js, { flag: 'w+' });
+  fs.writeFileSync('../../tmp/humanitybox.js', js, { flag: 'w+' });
   next();
 });
 
 sequence.then(function(next) {
-  fs.writeFileSync('/tmp/campaigns-shown.csv', existingCampaigns.join(','));
+  fs.writeFileSync('../../tmp/campaigns-shown.csv', existingCampaigns.join(','));
 });
 
 sequence.then(function(next) {
