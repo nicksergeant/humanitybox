@@ -1,3 +1,39 @@
-div.humanitybox {
-  background: yellow;
+a.humanitybox {
+  background: white;
+  border: 3px solid white;
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  color: #1D1D1D;
+  display: block;
+  padding: 10px;
+}
+a.humanitybox:hover {
+  border-color: #6EC8CC;
+  text-decoration: none;
+}
+a.humanitybox img {
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+span.humanitybox-title {
+  border-bottom: 1px solid #DDD;
+  color: #6EC8CC;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  margin-bottom: 10px;
+  margin-top: 0;
+  overflow: hidden;
+  padding-bottom: 10px;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+span.humanitybox-blurb {
+  color: #6F6F6F;
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 14px;
 }
