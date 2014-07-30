@@ -73,12 +73,12 @@ sequence.then(function(next) {
     campaigns: JSON.stringify(processedCampaigns),
     css: css
   });
-  fs.writeFileSync(__dirname + '/../../../tmp/humanitybox.js', js, { flag: 'w+' });
+  fs.writeFileSync(__dirname + '/tmp/humanitybox.js', js, { flag: 'w+' });
   next();
 });
 
 sequence.then(function(next) {
-  fs.writeFileSync(__dirname + '/../../../tmp/campaigns-shown.csv', existingCampaigns.join(','));
+  fs.writeFileSync(__dirname + '/tmp/campaigns-shown.csv', existingCampaigns.join(','));
 });
 
 sequence.then(function(next) {
