@@ -3,6 +3,7 @@
 var fs = require('fs');
 var futures = require('futures');
 var request = require('request');
+var ejs = require('ejs');
 
 process.on('uncaughtException', function (error) {
   console.log(error.stack);
@@ -13,6 +14,7 @@ var existingCampaigns = fs.readFileSync(__dirname + '/../../campaigns-shown.csv'
   .trim()
   .split(',');
 var newCampaigns = [];
+var processedCampaigns = [];
 
 var getCampaigns = function(page, next) {
   request('http://www.giveforward.com/manage/stats_fundraisers/active?apiKey=' + process.env.GF_KEY + '&page=' + page, function(err, response, body) {
@@ -47,7 +49,32 @@ sequence.then(function(next) {
 });
 
 sequence.then(function(next) {
-  // Build JS for these campaigns.
+  newCampaigns.forEach(function(campaign) {
+    processedCampaigns.push({
+      uuid: campaign.uuid,
+      url: campaign.url,
+      title: campaign.title,
+      blurb: campaign.blurb,
+      goal: campaign.goal,
+      image_url: campaign.image_url.replace('c_fill,g_face,h_HEIGHT,w_WIDTH', '')
+    });
+  });
+  next();
+});
+
+sequence.then(function(next) {
+  var css = fs.readFileSync(__dirname + '/../../embed/template.css', { flag: 'a+' })
+    .toString()
+    .replace(/\n/g, ' ')
+    .replace(/  /g, '')
+    .trim();
+  var template = __dirname + '/../../embed/template.js';
+  var js = ejs.render(fs.readFileSync(template, 'utf-8'), {
+    campaigns: JSON.stringify(processedCampaigns),
+    css: css
+  });
+  fs.writeFileSync(__dirname + '/../../embed/humanitybox.js', js);
+  next();
 });
 
 sequence.then(function(next) {

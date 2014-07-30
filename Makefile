@@ -1,8 +1,8 @@
 build:
-	@node scripts/make/build-js.js
+	@node scripts/make/build.js
 
 deploy:
-	@node scripts/make/deploy-to-s3.js
+	@node scripts/make/deploy.js
 
 reset:
 	@echo > campaigns-shown.csv
