@@ -1,0 +1,1 @@
+{"virtualbox":{"/var/www/humanitybox":{"guestpath":"/var/www/humanitybox","hostpath":"/Users/Nick/Code/humanitybox","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/Nick/Code/humanitybox","disabled":false}}}

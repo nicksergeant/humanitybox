@@ -1,0 +1,25 @@
+{
+  "css": [
+    "public/src/css/styles.css"
+  ],
+  "js": [
+    "public/src/app/app.js",
+    "public/src/app/users/init.js",
+    "public/src/app/users/services.js",
+    "public/src/app/users/routes.js",
+    "public/src/app/admin/init.js",
+    "public/src/app/admin/routes.js"
+  ],
+  "vendorcss": [
+    "public/vendor/bootstrap/dist/css/bootstrap.min.css",
+    "public/vendor/nprogress/nprogress.css"
+  ],
+  "vendorjs": [
+    "public/vendor/jquery/dist/jquery.min.js",
+    "public/vendor/angular/angular.min.js",
+    "public/vendor/angular-route/angular-route.min.js",
+    "public/vendor/bootstrap/dist/js/bootstrap.min.js",
+    "public/vendor/epixa-resource/src/resource.js",
+    "public/vendor/nprogress/nprogress.js"
+  ]
+}

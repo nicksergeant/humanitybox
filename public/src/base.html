@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en" ng-app="humanitybox"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en" ng-app="humanitybox"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en" ng-app="humanitybox"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en" ng-app="humanitybox"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <title>Humanity Box - Ads that change lives.</title>
@@ -13,8 +13,33 @@
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+  <% if (env === 'production') { %>
+    <link rel="stylesheet" type="text/css" href="/public/ng-job.css?<%= cssModifiedTime %>" />
+    <script type="text/javascript" src="/public/ng-job.js?<%= jsModifiedTime %>"></script>
+  <% } else { %>
+    <% for (file in resources.vendorcss) { %>
+      <link rel="stylesheet" type="text/css" href="/<%= resources.vendorcss[file] %>" />
+    <% } for (file in resources.css) { %>
+      <link rel="stylesheet" type="text/css" href="/<%= resources.css[file] %>" />
+    <% } %>
+    <% for (file in resources.vendorjs) { %>
+      <script type="text/javascript" src="/<%= resources.vendorjs[file] %>"></script>
+    <% } for (file in resources.js) { %>
+      <script type="text/javascript" src="/<%= resources.js[file] %>"></script>
+    <% } %>
+  <% } %>
+  <script type="text/javascript">
+    <% if (env) { %>window.env = '<%- env %>';<% } %>
+    <% if (message) { %>window.message = '<%- message %>';<% } %>
+    <% if (user) { %>
+      window.user = {
+        username: '<%- user.username %>',
+        id: '<%- user.id %>'
+      };
+    <% } %>
+  </script>
 </head>
-<body>
+<body ng-cloak class="ng-cloak">
   <header>
     <div class="container">
       <div class="sixteen columns">
@@ -31,6 +56,7 @@
       </div>    
     </div>
   </header>
+  <div ng-view></div>
   <section id="about" class="intro layer">
     <div class="container">
       <div class="sixteen columns">
@@ -134,5 +160,8 @@
       s.parentNode.insertBefore(t, s);
     })();
   </script>
+  <% if (env === 'development') { %>
+    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  <% } %>
 </body>
 </html>

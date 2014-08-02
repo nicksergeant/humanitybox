@@ -1,0 +1,105 @@
+<section class="container admin -users" style="margin-top: 50px;">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <form class="form-inline">
+        <div class="row">
+          <div class="col-md-10">
+            <input ng-model="usersQuery" placeholder="Search users..." class="form-control" type="search" name="usersQuery" value="">
+          </div>
+          <div class="col-md-2">
+            <button data-toggle="modal" data-target="#add-user" class="btn btn-primary pull-right">Add User</button>
+          </div>
+        </div>
+      </form>
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Admin</th>
+            <th>Created</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="u in users.resources|filter:usersQuery|orderBy:'username'" ng-show="users">
+          <tr>
+            <td>{{ u.username }}</td>
+            <td><a ng-href="mailto:{{ u.email }}">{{ u.email }}</a></td>
+            <td>
+              <input ng-disabled="u.id == user.id" type="checkbox" ng-change="save(u)" ng-model="u.isAdmin" />
+            </td>
+            <td>{{ u.created|date:'medium' }}</td>
+            <td><a data-toggle="modal" data-target="#edit-user" ng-click="$parent.editingUser = u">Edit</a></td>
+            <td><a ng-show="u.id != user.id && !u.isAdmin" ng-click="delete(u, $event)">Delete</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal fade" id="add-user">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form name="newUserForm">
+            <input style="display: none" type="text" name="fieldtodisableautofill"/>
+            <input style="display: none" type="password" name="fieldtodisableautofill"/>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Add user</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="newUsername">Username:</label>
+                <input class="form-control" id="newUsername" required type="text" ng-model="newUser.username" />
+              </div>
+              <div class="form-group">
+                <label for="newEmail">Email:</label>
+                <input class="form-control" id="newEmail" required type="email" ng-model="newUser.email" />
+              </div>
+              <div class="form-group">
+                <label for="newPassword">Password:</label>
+                <input class="form-control" id="newPassword" required type="password" ng-model="newUser.password" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" ng-disabled="newUserForm.$invalid" class="btn btn-success" data-dismiss="modal" ng-click="create(newUser)">Create</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="edit-user">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form name="editUserForm">
+            <input style="display: none" type="text" name="fieldtodisableautofill"/>
+            <input style="display: none" type="password" name="fieldtodisableautofill"/>
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Edit &ldquo;{{ editingUser.username || editingUser.email }}&rdquo;</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="editUsername">Username:</label>
+                <input class="form-control" id="editUsername" required type="text" ng-model="editingUser.username" />
+              </div>
+              <div class="form-group">
+                <label for="editEmail">Email:</label>
+                <input class="form-control" id="editEmail" required type="email" ng-model="editingUser.email" />
+              </div>
+              <div class="form-group">
+                <label for="editPassword">New password:</label>
+                <input class="form-control" id="editPassword" type="password" ng-model="editingUser.password" />
+                <span class="help-block">Leave blank for unchanged.</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" ng-disabled="editUserForm.$invalid" class="btn btn-success" data-dismiss="modal" ng-click="save(editingUser)">Save</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
