@@ -7,13 +7,13 @@ var express = require('express');
 // Application config.
 var app = express();
 app.set('view engine', 'ejs');
-app.set('views', 'client/src');
+app.set('views', 'public/src');
 
 // Static resources.
-app.use(express.favicon('client/src/img/favicon.ico'));
-app.use('/client', express.compress());
-app.use('/client', express.static('client'));
-app.use('/client', function(req, res, next) { res.send(404); });
+app.use(express.favicon('public/src/img/favicon.ico'));
+app.use('/public', express.compress());
+app.use('/public', express.static('public'));
+app.use('/public', function(req, res, next) { res.send(404); });
 
 // Server middleware.
 app.use(express.cookieParser(process.env.COOKIE_SECRET || 'this is a secret'));
