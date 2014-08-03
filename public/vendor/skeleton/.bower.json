@@ -1,0 +1,14 @@
+{
+  "name": "skeleton",
+  "homepage": "https://github.com/dhgamache/Skeleton",
+  "_release": "7ab682091d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "7ab682091d1032035cfcb668e6bd4b465bfa4679"
+  },
+  "_source": "git://github.com/dhgamache/Skeleton.git",
+  "_target": "*",
+  "_originalSource": "skeleton",
+  "_direct": true
+}

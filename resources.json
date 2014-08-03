@@ -8,9 +8,13 @@
     "public/src/app/users/services.js",
     "public/src/app/users/routes.js",
     "public/src/app/admin/init.js",
-    "public/src/app/admin/routes.js"
+    "public/src/app/admin/routes.js",
+    "public/src/app/pages/init.js",
+    "public/src/app/pages/routes.js"
   ],
   "vendorcss": [
+    "public/src/css/vendor/layout.css",
+    "public/src/css/vendor/skeleton.css",
     "public/vendor/bootstrap/dist/css/bootstrap.min.css",
     "public/vendor/nprogress/nprogress.css"
   ],

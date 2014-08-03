@@ -6,7 +6,8 @@ var deps = [
   'epixa-resource',
   'ngRoute',
   'users',
-  'admin'
+  'admin',
+  'pages'
 ];
 
 humanitybox = angular.module('humanitybox', deps);
