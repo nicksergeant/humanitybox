@@ -14,8 +14,8 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <% if (env === 'production') { %>
-    <link rel="stylesheet" type="text/css" href="/public/ng-job.css?<%= cssModifiedTime %>" />
-    <script type="text/javascript" src="/public/ng-job.js?<%= jsModifiedTime %>"></script>
+    <link rel="stylesheet" type="text/css" href="/public/humanitybox.css?<%= cssModifiedTime %>" />
+    <script type="text/javascript" src="/public/humanitybox.js?<%= jsModifiedTime %>"></script>
   <% } else { %>
     <% for (file in resources.vendorcss) { %>
       <link rel="stylesheet" type="text/css" href="/<%= resources.vendorcss[file] %>" />
