@@ -21,7 +21,7 @@ wheel-group:
     - shell: /usr/bin/fish
   ssh_auth.present:
     - user: {{ user.name }}
-    {% if user.name != 'vagrant' %}
+    {% if user.name != 'vagrant' and user.name != 'deploy' %}
     - source: salt://users/{{ user.name }}.pub
     {% endif %}
     - makedirs: True
@@ -37,17 +37,6 @@ deploy-authorized-keys:
     - group: deploy
     - mode: 600
     - source: salt://users/deploy.authorized_keys
-    - makedirs: True
-    - require:
-      - user: deploy
-
-deploy-rsa:
-  file.managed:
-    - name: /home/deploy/.ssh/id_rsa
-    - user: deploy
-    - group: deploy
-    - mode: 700
-    - source: salt://users/deploy.rsa
     - makedirs: True
     - require:
       - user: deploy
