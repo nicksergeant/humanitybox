@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../server/config');
+var config = require('../../server/config');
 var fs = require('fs');
 var futures = require('futures');
 var knox = require('knox');

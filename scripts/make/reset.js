@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../server/config');
+var config = require('../../server/config');
 var knox = require('knox');
 
 var s3 = knox.createClient({

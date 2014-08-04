@@ -1,7 +1,7 @@
 'use strict';
 
 var cloudfront = require('cloudfront');
-var config = require('../server/config');
+var config = require('../../server/config');
 var ejs = require('ejs');
 var fs = require('fs');
 var futures = require('futures');

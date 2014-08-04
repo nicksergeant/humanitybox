@@ -9,7 +9,12 @@
   html += '  <span class="humanitybox-blurb">' + campaign.blurb + '</span>';
   html += '</a>';
   html += '<a class="humanitybox-link" href="http://humanitybox.com/">';
-  html += '  <img src="http://humanitybox.com/favicon.ico" /> <span>Humanity Box</span>'
+  html += '  <img src="http://humanitybox.com/favicon.ico" /> <span>Humanity Box</span>';
   html += '</a>';
-  document.write(html);
+  var div = document.getElementById('humanitybox');
+  if (div) {
+    div.innerHTML = html;
+  } else {
+    document.write(html);
+  }
 }(document));
