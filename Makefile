@@ -23,10 +23,10 @@ css: $(css_files)
 	@cat $(css_files) > public/humanitybox.css
 
 deploy: jshint
-	@ssh deploy@new.humanitybox.com -p 55555 'cd /var/www/humanitybox; git pull'
-	@ssh deploy@new.humanitybox.com -p 55555 'cd /var/www/humanitybox; make install'
-	@ssh deploy@new.humanitybox.com -p 55555 'cd /var/www/humanitybox; make compile'
-	@ssh deploy@new.humanitybox.com -p 55555 'sudo supervisorctl restart humanitybox'
+	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; git pull'
+	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; make install'
+	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; make compile'
+	@ssh deploy@humanitybox.com -p 55555 'sudo supervisorctl restart humanitybox'
 
 db:
 	@node scripts/make/init-database.js
@@ -46,13 +46,13 @@ run: install jshint
 	@vagrant ssh -c 'sudo supervisorctl restart humanitybox && sudo supervisorctl tail -f humanitybox stdout'
 
 salt-server:
-	@scp -q -P 55555 -r ./salt/ nick@new.humanitybox.com:salt
-	@scp -q -P 55555 -r ./pillar/ nick@new.humanitybox.com:pillar
-	@ssh nick@new.humanitybox.com -p 55555 'sudo rm -rf /srv'
-	@ssh nick@new.humanitybox.com -p 55555 'sudo mkdir /srv'
-	@ssh nick@new.humanitybox.com -p 55555 'sudo mv ~/salt /srv/salt'
-	@ssh nick@new.humanitybox.com -p 55555 'sudo mv ~/pillar /srv/pillar'
-	@ssh nick@new.humanitybox.com -p 55555 'sudo salt-call --local state.highstate'
+	@scp -q -P 55555 -r ./salt/ nick@humanitybox.com:salt
+	@scp -q -P 55555 -r ./pillar/ nick@humanitybox.com:pillar
+	@ssh nick@humanitybox.com -p 55555 'sudo rm -rf /srv'
+	@ssh nick@humanitybox.com -p 55555 'sudo mkdir /srv'
+	@ssh nick@humanitybox.com -p 55555 'sudo mv ~/salt /srv/salt'
+	@ssh nick@humanitybox.com -p 55555 'sudo mv ~/pillar /srv/pillar'
+	@ssh nick@humanitybox.com -p 55555 'sudo salt-call --local state.highstate'
 
 salt-vagrant:
 	@scp -q -P 2222 -i ~/.vagrant.d/insecure_private_key -r ./salt/ vagrant@localhost:salt
@@ -64,20 +64,20 @@ salt-vagrant:
 	@ssh vagrant@localhost -p 2222 -i ~/.vagrant.d/insecure_private_key 'sudo salt-call --local state.highstate'
 
 server:
-	@ssh root@new.humanitybox.com 'sudo apt-get update'
-	@ssh root@new.humanitybox.com 'sudo apt-get install -y software-properties-common python-software-properties'
-	@ssh root@new.humanitybox.com 'sudo add-apt-repository -y ppa:saltstack/salt'
-	@ssh root@new.humanitybox.com 'sudo apt-get update'
-	@ssh root@new.humanitybox.com 'sudo apt-get install -y salt-minion'
-	@scp -q -P 22 -r ./salt/ root@new.humanitybox.com:salt
-	@scp -q -P 22 -r ./pillar/ root@new.humanitybox.com:pillar
-	@ssh root@new.humanitybox.com 'sudo rm -rf /srv'
-	@ssh root@new.humanitybox.com 'sudo mkdir /srv'
-	@ssh root@new.humanitybox.com 'sudo mv ~/salt /srv/salt'
-	@ssh root@new.humanitybox.com 'sudo mv ~/pillar /srv/pillar'
-	@ssh root@new.humanitybox.com 'sudo salt-call --local state.highstate'
-	@ssh deploy@new.humanitybox.com -p 55555 'cd /var/www/humanitybox; make db'
-	@ssh deploy@new.humanitybox.com -p 55555 'cd /var/www/humanitybox; make admin'
+	@ssh root@humanitybox.com 'sudo apt-get update'
+	@ssh root@humanitybox.com 'sudo apt-get install -y software-properties-common python-software-properties'
+	@ssh root@humanitybox.com 'sudo add-apt-repository -y ppa:saltstack/salt'
+	@ssh root@humanitybox.com 'sudo apt-get update'
+	@ssh root@humanitybox.com 'sudo apt-get install -y salt-minion'
+	@scp -q -P 22 -r ./salt/ root@humanitybox.com:salt
+	@scp -q -P 22 -r ./pillar/ root@humanitybox.com:pillar
+	@ssh root@humanitybox.com 'sudo rm -rf /srv'
+	@ssh root@humanitybox.com 'sudo mkdir /srv'
+	@ssh root@humanitybox.com 'sudo mv ~/salt /srv/salt'
+	@ssh root@humanitybox.com 'sudo mv ~/pillar /srv/pillar'
+	@ssh root@humanitybox.com 'sudo salt-call --local state.highstate'
+	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; make db'
+	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; make admin'
 
 vagrant:
 	@vagrant up
