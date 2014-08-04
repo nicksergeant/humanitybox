@@ -20,6 +20,7 @@ var getInput = function(label) {
 };
 
 var customer, username, password;
+console.log('\n# Create admin user:\n');
 getInput('Username')
   .then(function(usernameInput) {
     username = usernameInput.replace(/![@\w]/g, '').trim();
