@@ -1,5 +1,5 @@
 campaigns-shown.csv
-config
+server/config/index.js
 embed/humanitybox.js
 node_modules
 tmp

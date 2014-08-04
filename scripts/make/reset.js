@@ -1,11 +1,12 @@
 'use strict';
 
+var config = require('../server/config');
 var knox = require('knox');
 
 var s3 = knox.createClient({
-  key: process.env.AWS_KEY,
-  secret: process.env.AWS_SECRET,
-  bucket: process.env.S3_BUCKET
+  key: config.aws.key,
+  secret: config.aws.secret,
+  bucket: config.s3.bucket
 });
 
 process.on('uncaughtException', function (error) {

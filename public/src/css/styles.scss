@@ -62,6 +62,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0; 
 }
+label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
 // Base
 body {
@@ -99,16 +104,40 @@ a {
   text-decoration: none;
   &:hover {
     color: lighten($blue, 7);
+    text-decoration: none;
   }
 }
+
 #home .row {
   margin-left: 0;
   margin-right: 0;
 }
-#home *, footer * {
+footer * {
   box-sizing: content-box;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
+}
+#admin {
+  &.-users {
+    div.panel-default {
+      padding: 10px;
+
+      form > div, form div.col-md-10 {
+        margin-bottom: 10px;
+      }
+      button, input[name="usersQuery"] {
+        width: 100% !important;
+      }
+      tbody {
+        border-top: 0
+      }
+    }
+  }
+  div.modal {
+    div.modal-footer {
+      margin-top: 0;
+    }
+  }
 }
 
 // Helpers 
@@ -329,9 +358,11 @@ strong {
 // Footer 
 footer {
   background-color: $darkGray;
+  margin-top: 50px;
   padding: 30px 0 20px 0;
   position: relative;
   z-index: 1;
+
   ul {
     margin-top: 20px;
     text-align: center;
@@ -372,6 +403,9 @@ footer {
     margin-top: -65px;
     width: 75px;
   }
+}
+#home footer {
+  margin-top: 0;
 }
 
 // Buttons

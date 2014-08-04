@@ -1,0 +1,33 @@
+{
+  "expr": true,
+  "evil": true,
+  "globals": {
+    "__dirname": false,
+    "$": false,
+    "after": false,
+    "alert": false,
+    "before": false,
+    "beforeEach": false,
+    "Buffer": false,
+    "casper": false,
+    "clearInterval": false,
+    "clearTimeout": false,
+    "com": false,
+    "console": false,
+    "describe": false,
+    "document": false,
+    "exports": false,
+    "it": false,
+    "jQuery": false,
+    "Image": false,
+    "module": false,
+    "navigator": false,
+    "process": false,
+    /* "Q": false, */
+    "require": false,
+    "setInterval": false,
+    "setTimeout": false,
+    "window": false
+  },
+  "globalstrict": true
+}

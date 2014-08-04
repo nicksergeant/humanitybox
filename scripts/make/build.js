@@ -1,6 +1,7 @@
 'use strict';
 
 var cloudfront = require('cloudfront');
+var config = require('../server/config');
 var ejs = require('ejs');
 var fs = require('fs');
 var futures = require('futures');
@@ -8,11 +9,11 @@ var knox = require('knox');
 var request = require('request');
 var uuid = require('node-uuid');
 
-var cf = cloudfront.createClient(process.env.AWS_KEY, process.env.AWS_SECRET);
+var cf = cloudfront.createClient(config.aws.key, config.aws.secret);
 var s3 = knox.createClient({
-  key: process.env.AWS_KEY,
-  secret: process.env.AWS_SECRET,
-  bucket: process.env.S3_BUCKET
+  key: config.aws.key,
+  secret: config.aws.secret,
+  bucket: config.s3.bucket
 });
 
 process.on('uncaughtException', function (error) {
@@ -24,7 +25,7 @@ var newCampaigns = [];
 var processedCampaigns = [];
 
 var getCampaigns = function(page, next) {
-  request('http://www.giveforward.com/manage/stats_fundraisers/active?apiKey=' + process.env.GF_KEY + '&page=' + page, function(err, response, body) {
+  request('http://www.giveforward.com/manage/stats_fundraisers/active?apiKey=' + config.gfKey + '&page=' + page, function(err, response, body) {
     var campaigns = JSON.parse(body).data[0].fundraisers;
 
     console.log('- On page ' + page + '.');
@@ -121,7 +122,7 @@ sequence.then(function(next) {
 });
 
 sequence.then(function(next) {
-  cf.createInvalidation(process.env.CF_DISTRIBUTION, uuid.v4(), '/humanitybox.js', function(err, invalidation) {
+  cf.createInvalidation(config.cfDistribution, uuid.v4(), '/humanitybox.js', function(err, invalidation) {
     if (err) throw err;
     console.log('- Old humanitybox.js invalidated.');
     process.exit();

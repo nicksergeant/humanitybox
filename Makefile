@@ -34,7 +34,6 @@ db:
 install:
 	@npm install
 	@cd public && bower install
-	@echo Installed.
 
 js: $(js_files)
 	@cat $(js_files) > public/humanitybox.js
