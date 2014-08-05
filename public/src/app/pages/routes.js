@@ -12,21 +12,15 @@ angular.module('pages')
   });
   $routeProvider.when('/about', {
     templateUrl: '/public/src/app/pages/home.html',
-    controller: function($location) {
-      $location.path('/').hash('about');
-    }
+    controller: function($location) { $location.path('/').hash('about'); }
   });
   $routeProvider.when('/contact', {
     templateUrl: '/public/src/app/pages/home.html',
-    controller: function($location) {
-      $location.path('/').hash('contact');
-    }
+    controller: function($location) { $location.path('/').hash('contact'); }
   });
   $routeProvider.when('/install', {
     templateUrl: '/public/src/app/pages/home.html',
-    controller: function($location) {
-      $location.path('/').hash('install');
-    }
+    controller: function($location) { $location.path('/').hash('install'); }
   });
 }]);
 
