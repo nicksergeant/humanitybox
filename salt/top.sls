@@ -10,3 +10,4 @@ base:
     - nodejs
     - supervisor
     - application
+    - cron
