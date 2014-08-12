@@ -50,7 +50,10 @@ function processLogFile(logFile, key) {
   logLines.shift(); logLines.shift(); logLines.pop();
   console.log('- (' + index + ' of ' + logFiles.length + ') ' + key + ' - ' + logLines.length + ' records.');
   index++;
-  logLines.forEach(function(line) { logs.push(line); });
+  logLines.forEach(function(line) {
+    logs.push(line);
+    r.table('stats_raw').insert(line.split('\t')).run(db.conn);
+  });
 }
 
 var sequence = futures.sequence();

@@ -11,6 +11,8 @@ var db = r.connect({
   }).then(function() {
     return r.db('humanitybox').tableCreate('stats').run(conn);
   }).then(function() {
+    return r.db('humanitybox').tableCreate('stats_raw').run(conn);
+  }).then(function() {
     console.log('Done.');
     process.exit();
   }).error(function(err) {
