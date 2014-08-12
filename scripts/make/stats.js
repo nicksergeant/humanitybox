@@ -51,8 +51,14 @@ function processLogFile(logFile, key) {
   console.log('- (' + index + ' of ' + logFiles.length + ') ' + key + ' - ' + logLines.length + ' records.');
   index++;
   logLines.forEach(function(line) {
-    logs.push(line);
-    r.table('stats_raw').insert({ fields: line.split('\t') }).run(db.conn);
+    var fields = line.split('\t');
+    var url = fields[9];
+    var domainParts = url.match('^(?:(?:f|ht)tps?://)?([^/:]+)');
+    var log = { domain: domainParts.length > 1 ? domainParts[1] : null, fields: fields };
+    logs.push(log);
+    r.table('stats_raw').insert(log)
+      .run(db.conn)
+      .error(function(err) { db.handleError(err); });
   });
 }
 
@@ -83,12 +89,9 @@ sequence.then(function(next) {
 sequence.then(function(next) {
   var logLinesSequence = futures.sequence();
   logs.forEach(function(log) {
-    var url = log.split('\t')[9];
-    var domainParts = url.match('^(?:(?:f|ht)tps?://)?([^/:]+)');
-    if (domainParts.length > 1 && url !== '-' && url !== '0.0.0.0' && url !== 'localhost' && url !== 'local.humanitybox.com') {
-      url = domainParts[1];
+    if (log.domain !== '-' && log.domain !== '0.0.0.0' && log.domain !== 'localhost' && log.domain !== 'local.humanitybox.com') {
       logLinesSequence.then(function(logLinesSequenceNext) {
-        r.table('stats').filter({ url: url })
+        r.table('stats').filter({ url: log.domain })
           .run(db.conn).then(function(stats) {
             stats.toArray(function(err, stats) {
               if (err) return db.handleError(err);
@@ -96,13 +99,13 @@ sequence.then(function(next) {
                 var existingStat = stats[0];
                 r.table('stats').get(existingStat.id).update({ count: existingStat.count + 1 }, { returnVals: true })
                   .run(db.conn).then(function(stat) {
-                    console.log('- ' + url + ' - Count: ' + stat.new_val.count);
+                    console.log('- ' + log.domain + ' - Count: ' + stat.new_val.count);
                     logLinesSequenceNext();
                   }).error(function(err) { db.handleError(err); });
               } else {
-                r.table('stats').insert({ url: url, count: 1 }, { returnVals: true })
+                r.table('stats').insert({ url: log.domain, count: 1 }, { returnVals: true })
                   .run(db.conn).then(function(stat) {
-                    console.log('- ' + url + ' - Count: 1');
+                    console.log('- ' + log.domain + ' - Count: 1');
                     logLinesSequenceNext();
                   }).error(function(err) { db.handleError(err); });
               }
