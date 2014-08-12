@@ -37,7 +37,11 @@ function downloadLogFile(key) {
     res
       .on('data', function (data) { processLogFile(data, key); })
       .on('error', function (err) { throw err; })
-      .on('end', function () { deferred.resolve(); });
+      .on('end', function () {
+        s3Logs.del(key).on('response', function(res){
+          deferred.resolve();
+        }).end(); 
+      });
   });
   return deferred.promise;
 }
@@ -61,7 +65,13 @@ sequence.then(function(next) {
 
 sequence.then(function(next) {
   var filesSequence = futures.sequence();
-  logFiles.forEach(function(logFile) {
+
+  // TODO: Remove.
+  var i = 1;
+  var tmpLogFiles = [];
+  logFiles.some(function(logFile) { tmpLogFiles.push(logFile); if (i > 1) return true; i++; });
+
+  tmpLogFiles.forEach(function(logFile) {
     filesSequence.then(function(filesSequenceNext) {
       downloadLogFile(logFile.Key).then(function() {
         filesSequenceNext();
