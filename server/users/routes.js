@@ -33,10 +33,10 @@ exports.create = function() {
 exports.get = function() {
   return function(req, res, next) {
     if (!req.user) return res.send(403);
+    if (!req.user.isAdmin && req.params.id !== req.user.id) return res.send(500);
     r.table('users').get(req.params.id).without('password')
       .run(db.conn).then(function(user) {
-        if (!req.user.isAdmin && user.id !== req.user.id) res.send(500);
-        return user ? res.json(configureUser(user)) : res.send(404);
+        user ? res.json(configureUser(user)) : res.send(404);
       }).error(function(err) { db.handleError(err, res); });
   };
 };
@@ -85,11 +85,7 @@ exports.update = function() {
   return function(req, res, next) {
     if (!req.user || !req.user.isAdmin) return res.send(403);
     bcrypt.hash(req.body.password, null, null, function(err, hash) {
-      if (!req.body.password) {
-        delete req.body.password;
-      } else {
-        req.body.password = hash;
-      }
+      req.body.password ? req.body.password = hash : delete req.body.password;
       r.table('users').get(req.params.id).update(req.body, { returnVals: true })
         .run(db.conn).then(function(user) {
           delete user.new_val.password;
