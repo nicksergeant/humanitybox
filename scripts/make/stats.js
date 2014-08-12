@@ -69,7 +69,7 @@ sequence.then(function(next) {
   // TODO: Remove.
   var i = 1;
   var tmpLogFiles = [];
-  logFiles.some(function(logFile) { tmpLogFiles.push(logFile); if (i > 1000) return true; i++; });
+  logFiles.some(function(logFile) { tmpLogFiles.push(logFile); if (i > 5000) return true; i++; });
 
   tmpLogFiles.forEach(function(logFile) {
     filesSequence.then(function(filesSequenceNext) {
