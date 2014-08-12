@@ -65,13 +65,7 @@ sequence.then(function(next) {
 
 sequence.then(function(next) {
   var filesSequence = futures.sequence();
-
-  // TODO: Remove.
-  var i = 1;
-  var tmpLogFiles = [];
-  logFiles.some(function(logFile) { tmpLogFiles.push(logFile); if (i > 5000) return true; i++; });
-
-  tmpLogFiles.forEach(function(logFile) {
+  logFiles.forEach(function(logFile) {
     filesSequence.then(function(filesSequenceNext) {
       downloadLogFile(logFile.Key).then(function() {
         filesSequenceNext();
