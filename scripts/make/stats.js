@@ -52,7 +52,7 @@ function processLogFile(logFile, key) {
   index++;
   logLines.forEach(function(line) {
     logs.push(line);
-    r.table('stats_raw').insert(line.split('\t')).run(db.conn);
+    r.table('stats_raw').insert({ fields: line.split('\t') }).run(db.conn);
   });
 }
 
