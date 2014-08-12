@@ -153,6 +153,10 @@ a {
       font-size: 24px;
       font-weight: bold;
       padding: 20px 0;
+
+      &.count {
+        width: 135px;
+      }
     }
   }
   p.disclaimer {

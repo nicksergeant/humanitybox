@@ -15,8 +15,14 @@
       <div class="sixteen columns">
         <h2>Top 20 Publishers</h2>
         <table>
+          <thead>
+            <tr>
+              <th>Impressions</th>
+              <th>Site</th>
+            </tr>
+          </thead>
           <tr ng-repeat="stat in stats.resources">
-            <td>{{ stat.count|number }}</td>
+            <td class="count">{{ stat.count|number }}</td>
             <td><a ng-href="http://{{ stat.url }}">{{ stat.url }}</a></td>
           </tr>
         </table>
