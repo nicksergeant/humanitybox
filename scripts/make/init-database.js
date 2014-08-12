@@ -9,6 +9,8 @@ var db = r.connect({
   r.dbCreate('humanitybox').run(conn).then(function() {
     return r.db('humanitybox').tableCreate('users').run(conn);
   }).then(function() {
+    return r.db('humanitybox').tableCreate('stats').run(conn);
+  }).then(function() {
     console.log('Done.');
     process.exit();
   }).error(function(err) {

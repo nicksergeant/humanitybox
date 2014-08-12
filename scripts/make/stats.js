@@ -1,9 +1,11 @@
 'use strict';
 
 var config = require('../../server/config');
+var db = require('../../server/db');
 var fs = require('fs');
 var futures = require('futures');
 var knox = require('knox');
+var r = require('rethinkdb');
 var s3lister = require('s3-lister');
 var q = require('q');
 var zlib = require('zlib');
@@ -23,6 +25,7 @@ process.on('uncaughtException', function (error) {
   console.log(error.stack);
 });
 
+var index = 1;
 var logFiles = [];
 var logs = [];
 
@@ -41,7 +44,8 @@ function downloadLogFile(key) {
 function processLogFile(logFile, key) {
   var logLines = logFile.toString().split('\n');
   logLines.shift(); logLines.shift(); logLines.pop();
-  console.log('  - ' + key + ' - ' + logLines.length + ' records.');
+  console.log('- (' + index + ' of ' + logFiles.length + ') ' + key + ' - ' + logLines.length + ' records.');
+  index++;
   logLines.forEach(function(line) { logs.push(line); });
 }
 
@@ -57,17 +61,7 @@ sequence.then(function(next) {
 
 sequence.then(function(next) {
   var filesSequence = futures.sequence();
-
-  // TODO: Remove.
-  var i = 1;
-  var tmpLogFiles = [];
-  logFiles.some(function(logFile) {
-    tmpLogFiles.push(logFile);
-    if (i > 100) return true;
-    i++;
-  });
-
-  tmpLogFiles.forEach(function(logFile) {
+  logFiles.forEach(function(logFile) {
     filesSequence.then(function(filesSequenceNext) {
       downloadLogFile(logFile.Key).then(function() {
         filesSequenceNext();
@@ -80,9 +74,38 @@ sequence.then(function(next) {
 });
 
 sequence.then(function(next) {
+  var logLinesSequence = futures.sequence();
   logs.forEach(function(log) {
-    log = log.split('\t');
-    console.log(log[9]);
+    var url = log.split('\t')[9];
+    var domainParts = url.match('^(?:(?:f|ht)tps?://)?([^/:]+)');
+    if (domainParts.length > 1) {
+      url = domainParts[1];
+      logLinesSequence.then(function(logLinesSequenceNext) {
+        r.table('stats').filter({ url: url })
+          .run(db.conn).then(function(stats) {
+            stats.toArray(function(err, stats) {
+              if (err) return db.handleError(err);
+              if (stats.length) {
+                var existingStat = stats[0];
+                r.table('stats').get(existingStat.id).update({ count: existingStat.count + 1 }, { returnVals: true })
+                  .run(db.conn).then(function(stat) {
+                    console.log('- ' + url + ' - Count: ' + stat.new_val.count);
+                    logLinesSequenceNext();
+                  }).error(function(err) { db.handleError(err); });
+              } else {
+                r.table('stats').insert({ url: url, count: 1 }, { returnVals: true })
+                  .run(db.conn).then(function(stat) {
+                    console.log('- ' + url + ' - Count: 1');
+                    logLinesSequenceNext();
+                  }).error(function(err) { db.handleError(err); });
+              }
+            });
+          }).error(function(err) { db.handleError(err); });
+      });
+    }
+  });
+  logLinesSequence.then(function(logLinesSequenceNext) {
+    next();
   });
 });
 

@@ -1,3 +1,4 @@
+.htpasswd
 campaigns-shown.csv
 server/config/index.js
 embed/humanitybox.js
