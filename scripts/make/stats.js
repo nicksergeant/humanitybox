@@ -82,7 +82,7 @@ sequence.then(function(next) {
   logs.forEach(function(log) {
     var url = log.split('\t')[9];
     var domainParts = url.match('^(?:(?:f|ht)tps?://)?([^/:]+)');
-    if (domainParts.length > 1 && url !== '-' && url !== '0.0.0.0' && url !== 'localhost') {
+    if (domainParts.length > 1 && url !== '-' && url !== '0.0.0.0' && url !== 'localhost' && url !== 'local.humanitybox.com') {
       url = domainParts[1];
       logLinesSequence.then(function(logLinesSequenceNext) {
         r.table('stats').filter({ url: url })
