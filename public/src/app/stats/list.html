@@ -1,0 +1,27 @@
+<div id="stats">
+  <header>
+    <div class="scontainer">
+      <div class="sixteen columns">
+        <a href="/" class="header__logo left">Humanity Box</a>
+        <p class="right">
+          <a href="/stats" class="button -blue">Stats</a>
+          <a href="https://github.com/nicksergeant/humanitybox" class="button">Contribute on GitHub</a>
+        </p>
+      </div>    
+    </div>
+  </header>
+  <section>
+    <div class="scontainer">
+      <div class="sixteen columns">
+        <h2>Top 20 Publishers</h2>
+        <table>
+          <tr ng-repeat="stat in stats.resources">
+            <td>{{ stat.count|number }}</td>
+            <td><a ng-href="http://{{ stat.url }}">{{ stat.url }}</a></td>
+          </tr>
+        </table>
+        <p class="disclaimer">If you'd like your site to be removed from this list, please email <a href="mailto:nick@nicksergeant.com">nick@nicksergeant.com</a>.</p>
+      </div>
+    </div>
+  </section>
+</div>

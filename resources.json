@@ -10,7 +10,10 @@
     "public/src/app/admin/init.js",
     "public/src/app/admin/routes.js",
     "public/src/app/pages/init.js",
-    "public/src/app/pages/routes.js"
+    "public/src/app/pages/routes.js",
+    "public/src/app/stats/init.js",
+    "public/src/app/stats/services.js",
+    "public/src/app/stats/routes.js"
   ],
   "vendorcss": [
     "public/src/css/vendor/layout.css",

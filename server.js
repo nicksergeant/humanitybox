@@ -19,6 +19,7 @@ var r = require('rethinkdb');
 var raven = require('raven');
 var resources = JSON.parse(fs.readFileSync(__dirname + '/resources.json'));
 var session = require('express-session');
+var stats = require('./server/stats');
 var users = require('./server/users');
 
 // Express application.
@@ -66,6 +67,9 @@ app.get('/api/users', users.routes.list());
 app.get('/api/users/:id', users.routes.get());
 app.put('/api/users/:id', users.routes.update());
 app.delete('/api/users/:id', users.routes.delete());
+
+// Stats API.
+app.get('/api/stats', stats.routes.list());
 
 // Application route.
 app.get('/*', function(req, res) {

@@ -3,7 +3,7 @@
 angular.module('admin')
 
 .config(['$routeProvider', 'usersProvider', function($routeProvider, usersProvider) {
-  $routeProvider.when('/admin/', {
+  $routeProvider.when('/admin', {
     templateUrl: '/public/src/app/admin/users-list.html',
     controller: AdminUsersListView,
     resolve: {

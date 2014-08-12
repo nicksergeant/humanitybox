@@ -141,6 +141,27 @@ a {
     }
   }
 }
+#stats {
+  header {
+    padding-bottom: 30px;
+  }
+  table {
+    width: 100%;
+
+    td {
+      border-bottom: 1px solid #DDDDDD;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 20px 0;
+    }
+  }
+  p.disclaimer {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 18px;
+    margin-top: 50px;
+  }
+}
 
 // Helpers 
 .left {
@@ -166,8 +187,8 @@ header {
       size: em(32px);
       weight: 300;
     }
+    margin: 10px 0;
     line-height: 1.35em;
-    padding-bottom: 0.35em;
     text-shadow: 0 2px 0 rgba(0,0,0, 0.2);
   }
   p {
@@ -192,7 +213,6 @@ header {
       display: block;
       margin: 0 auto;
       max-width: 60%;
-
     }
   }
 }
@@ -419,6 +439,7 @@ footer {
   padding: 0.75em 1.25em;
   text-align: center;
   text-decoration: none;
+  border-radius: 2px;
   &:hover {
     background-color: lighten(#ddd, 8);
   }
@@ -436,5 +457,8 @@ footer {
     &:hover {
       background-color: lighten($blue, 3);
     }
+  }
+  &.-install {
+    margin-bottom: 0 !important;
   }
 }

@@ -7,7 +7,8 @@ var deps = [
   'ngRoute',
   'users',
   'admin',
-  'pages'
+  'pages',
+  'stats'
 ];
 
 humanitybox = angular.module('humanitybox', deps);
