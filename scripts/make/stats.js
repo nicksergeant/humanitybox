@@ -89,7 +89,11 @@ sequence.then(function(next) {
 sequence.then(function(next) {
   var logLinesSequence = futures.sequence();
   logs.forEach(function(log) {
-    if (log.domain !== '-' && log.domain !== '0.0.0.0' && log.domain !== 'localhost' && log.domain !== 'local.humanitybox.com') {
+    if (log.domain !== '-' &&
+        log.domain !== '0.0.0.0' &&
+        log.domain !== 'localhost' &&
+        log.domain !== 'local.humanitybox.com' &&
+        (log.domain.indexOf('snipt.net') === -1 || log.domain === 'snipt.net')) {
       logLinesSequence.then(function(logLinesSequenceNext) {
         r.table('stats').filter({ url: log.domain })
           .run(db.conn).then(function(stats) {
