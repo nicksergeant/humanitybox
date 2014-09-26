@@ -101,13 +101,13 @@ sequence.then(function(next) {
               if (err) return db.handleError(err);
               if (stats.length) {
                 var existingStat = stats[0];
-                r.table('stats').get(existingStat.id).update({ count: existingStat.count + 1 }, { returnVals: true })
+                r.table('stats').get(existingStat.id).update({ count: existingStat.count + 1 }, { returnChanges: true })
                   .run(db.conn).then(function(stat) {
-                    console.log('- ' + log.domain + ' - Count: ' + stat.new_val.count);
+                    console.log('- ' + log.domain + ' - Count: ' + stat.changes[0].new_val.count);
                     logLinesSequenceNext();
                   }).error(function(err) { db.handleError(err); });
               } else {
-                r.table('stats').insert({ url: log.domain, count: 1 }, { returnVals: true })
+                r.table('stats').insert({ url: log.domain, count: 1 }, { returnChanges: true })
                   .run(db.conn).then(function(stat) {
                     console.log('- ' + log.domain + ' - Count: 1');
                     logLinesSequenceNext();

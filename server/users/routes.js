@@ -18,11 +18,11 @@ exports.create = function() {
     req.body.created = new Date().toISOString();
     bcrypt.hash(req.body.password, null, null, function(err, hash) {
       req.body.password = hash;
-      r.table('users').insert(req.body, { returnVals: true })
+      r.table('users').insert(req.body, { returnChanges: true })
         .run(db.conn).then(function(result) {
           if (result.inserted === 1) {
-            delete result.new_val.password;
-            res.send(result.new_val);
+            delete result.changes[0].new_val.password;
+            res.send(result.changes[0].new_val);
           } else {
             res.send(500);
           }
@@ -86,10 +86,10 @@ exports.update = function() {
     if (!req.user || !req.user.isAdmin) return res.send(403);
     bcrypt.hash(req.body.password, null, null, function(err, hash) {
       req.body.password ? req.body.password = hash : delete req.body.password;
-      r.table('users').get(req.params.id).update(req.body, { returnVals: true })
+      r.table('users').get(req.params.id).update(req.body, { returnChanges: true })
         .run(db.conn).then(function(user) {
-          delete user.new_val.password;
-          res.json(user.new_val);
+          delete user.changes[0].new_val.password;
+          res.json(user.changes[0].new_val);
         }).error(function(err) { db.handleError(err, res); });
     });
   };
