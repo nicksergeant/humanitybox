@@ -37,8 +37,8 @@
     "passport-local": "^1.0.0",
     "q": "^1.0.1",
     "raven": "^0.6.3",
-    "rethinkdb": "^1.13.0-2",
     "request": "^2.39.0",
+    "rethinkdb": "^1.15.0-0",
     "s3-lister": "^0.1.0"
   }
 }
