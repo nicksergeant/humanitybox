@@ -3,7 +3,7 @@
 var r = require('rethinkdb');
 
 var db = r.connect({
-  host: 'localhost',
+  host: '172.17.42.1',
   db: 'humanitybox',
   port: 28015
 }).then(function(conn) {
