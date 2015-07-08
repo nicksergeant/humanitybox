@@ -70,6 +70,9 @@ app.delete('/api/users/:id', users.routes.delete());
 // Stats API.
 app.get('/api/stats', stats.routes.list());
 
+// Static.
+app.use('/public', express.static('public'));
+
 // Application route.
 app.get('/*', function(req, res) {
   var locals = {
