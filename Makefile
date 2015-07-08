@@ -24,9 +24,6 @@ css: $(css_files)
 
 deploy:
 	git push dokku
-	dokku run humanitybox.com make install
-	dokku run humanitybox.com make compile
-	dokku ps:restart humanitybox.com
 
 db:
 	@node scripts/make/init-database.js
