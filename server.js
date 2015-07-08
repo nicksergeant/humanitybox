@@ -4,7 +4,6 @@
 var auth = require('basic-auth');
 var bodyParser = require('body-parser');
 var compression = require('compression');
-var config = require('./server/config');
 var cookieParser = require('cookie-parser');
 var db = require('./server/db');
 var ejs = require('ejs');
@@ -34,8 +33,8 @@ app.set('json spaces', 0);
 app.use(flash());
 
 // Server middleware.
-app.use(cookieParser(config.cookieSecret));
-app.use(session({ secret: config.cookieSecret }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({ secret: process.env.COOKIE_SECRET }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? '' : 'dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -49,7 +48,7 @@ process.on('uncaughtException', function (error) {
 if (process.env.NODE_ENV === 'production') {
   app.use(errorhandler({ dumpExceptions: true, showStack: true }));
   app.use(protectJSON);
-  app.use(raven.middleware.express(config.sentryUrl));
+  app.use(raven.middleware.express(process.env.SENTRY_URL));
 }
 
 // Authentication.

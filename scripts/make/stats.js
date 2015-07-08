@@ -1,6 +1,5 @@
 'use strict';
 
-var config = require('../../server/config');
 var db = require('../../server/db');
 var fs = require('fs');
 var futures = require('futures');
@@ -11,14 +10,14 @@ var q = require('q');
 var zlib = require('zlib');
 
 var s3Logs = knox.createClient({
-  key: config.aws.key,
-  secret: config.aws.secret,
-  bucket: config.s3.logsBucket
+  key: process.env.AWS_KEY,
+  secret: process.env.AWS_SECRET,
+  bucket: process.env.LOGS_BUCKET
 });
 var s3 = knox.createClient({
-  key: config.aws.key,
-  secret: config.aws.secret,
-  bucket: config.s3.bucket
+  key: process.env.AWS_KEY,
+  secret: process.env.AWS_SECRET,
+  bucket: process.env.S3_BUCKET
 });
 
 process.on('uncaughtException', function (error) {
