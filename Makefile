@@ -22,11 +22,8 @@ compile: js css
 css: $(css_files)
 	@cat $(css_files) > public/humanitybox.css
 
-deploy: jshint
-	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; git pull'
-	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; make install'
-	@ssh deploy@humanitybox.com -p 55555 'cd /var/www/humanitybox; make compile'
-	@ssh deploy@humanitybox.com -p 55555 'sudo supervisorctl restart humanitybox'
+deploy:
+	git push dokku
 
 db:
 	@node scripts/make/init-database.js
