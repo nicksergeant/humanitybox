@@ -9,6 +9,7 @@ var db = require('./server/db');
 var ejs = require('ejs');
 var errorhandler = require('errorhandler');
 var express = require('express');
+var favicon = require('serve-favicon');
 var flash = require('connect-flash');
 var fs = require('fs');
 var morgan  = require('morgan');
@@ -38,6 +39,9 @@ app.use(session({ secret: process.env.COOKIE_SECRET }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? '' : 'dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+
+// Favicon.
+app.use(favicon(__dirname + '/public/src/img/favicon.ico'));
 
 // Traceback on uncaught exceptions.
 process.on('uncaughtException', function (error) {
