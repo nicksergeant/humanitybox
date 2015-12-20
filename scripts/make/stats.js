@@ -55,9 +55,6 @@ function processLogFile(logFile, key) {
     var domainParts = url.match('^(?:(?:f|ht)tps?://)?([^/:]+)');
     var log = { domain: domainParts.length > 1 ? domainParts[1] : null, fields: fields };
     logs.push(log);
-    r.table('stats_raw').insert(log)
-      .run(db.conn)
-      .error(function(err) { db.handleError(err); });
   });
 }
 
