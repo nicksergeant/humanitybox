@@ -38,7 +38,7 @@
     "q": "^1.0.1",
     "raven": "^0.6.3",
     "request": "^2.39.0",
-    "rethinkdb": "^1.15.0-0",
+    "rethinkdb": "^2.2.0",
     "s3-lister": "^0.1.0",
     "serve-favicon": "^2.3.0"
   }
