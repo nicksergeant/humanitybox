@@ -43,11 +43,6 @@ app.use(bodyParser.urlencoded());
 // Favicon.
 app.use(favicon(__dirname + '/public/src/img/favicon.ico'));
 
-// Traceback on uncaught exceptions.
-process.on('uncaughtException', function (error) {
-  console.log(error.stack);
-});
-
 // Production provisions.
 if (process.env.NODE_ENV === 'production') {
   app.use(errorhandler({ dumpExceptions: true, showStack: true }));

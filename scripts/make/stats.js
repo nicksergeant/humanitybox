@@ -20,10 +20,6 @@ var s3 = knox.createClient({
   bucket: process.env.S3_BUCKET
 });
 
-process.on('uncaughtException', function (error) {
-  console.log(error.stack);
-});
-
 var index = 1;
 var logFiles = [];
 var logs = [];
