@@ -15,7 +15,6 @@ var fs = require('fs');
 var morgan  = require('morgan');
 var passport = require('passport');
 var protectJSON = require('./server/lib/protectJSON');
-var r = require('rethinkdb');
 var raven = require('raven');
 var resources = JSON.parse(fs.readFileSync(__dirname + '/resources.json'));
 var session = require('express-session');
@@ -88,6 +87,6 @@ app.get('/*', function(req, res) {
 });
 
 // Server.
-db.then(function() {
+db.then(function(dbConn) {
   app.listen(process.env.PORT || 3000, '0.0.0.0');
 });

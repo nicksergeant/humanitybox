@@ -1,16 +1,21 @@
 'use strict';
 
 var db = require('../db');
-var r = require('rethinkdb');
 
 exports.list = function() {
   return function(req, res, next) {
-    r.table('stats').orderBy(r.desc('count')).limit(20)
-      .run(db.conn).then(function(stats) {
-        stats.toArray(function(err, stats) {
-          if (err) return db.handleError(err, res);
-          res.send(stats);
+    db.then(function(dbConn) {
+      dbConn.collection('statistics')
+        .find({})
+        .sort({ 'count': -1 })
+        .limit(20)
+        .toArray(function(err, items) {
+          if (err) throw new Error(err);
+          items.forEach(function(item) {
+            item.id = item._id.toString();
+          });
+          res.send(items);
         });
-      }).error(function(err) { db.handleError(err, res); });
+      });
   };
 };

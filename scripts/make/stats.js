@@ -4,7 +4,6 @@ var db = require('../../server/db');
 var fs = require('fs');
 var futures = require('futures');
 var knox = require('knox');
-var r = require('rethinkdb');
 var s3lister = require('s3-lister');
 var q = require('q');
 var zlib = require('zlib');
@@ -33,9 +32,9 @@ function downloadLogFile(key) {
       .on('data', function (data) { processLogFile(data, key); })
       .on('error', function (err) { throw err; })
       .on('end', function () {
-        s3Logs.del(key).on('response', function(res){
+        // s3Logs.del(key).on('response', function(res){
           deferred.resolve();
-        }).end(); 
+        // }).end(); 
       });
   });
   return deferred.promise;
@@ -87,26 +86,39 @@ sequence.then(function(next) {
         log.domain !== 'local.humanitybox.com' &&
         (log.domain.indexOf('snipt.net') === -1 || log.domain === 'snipt.net')) {
       logLinesSequence.then(function(logLinesSequenceNext) {
-        r.table('stats').filter({ url: log.domain })
-          .run(db.conn).then(function(stats) {
-            stats.toArray(function(err, stats) {
-              if (err) return db.handleError(err);
+        db.then(function(dbConn) {
+          dbConn.collection('statistics')
+            .find({ url: log.domain })
+            .toArray(function(err, stats) {
+              if (err) throw new Error(err);
               if (stats.length) {
                 var existingStat = stats[0];
-                r.table('stats').get(existingStat.id).update({ count: existingStat.count + 1 }, { returnChanges: true })
-                  .run(db.conn).then(function(stat) {
-                    console.log('- ' + log.domain + ' - Count: ' + stat.changes[0].new_val.count);
-                    logLinesSequenceNext();
-                  }).error(function(err) { db.handleError(err); });
+
+                dbConn.collection('statistics').findAndModify({ _id: existingStat._id }, [], {
+                  $set: {
+                    count: existingStat.count + 1
+                  }
+                }, function(err, result) {
+                  if (err) throw new Error(err);
+                  console.log('- ' + log.domain + ' - Count: ' + result.value.count);
+                  logLinesSequenceNext();
+                });
               } else {
-                r.table('stats').insert({ url: log.domain, count: 1 }, { returnChanges: true })
-                  .run(db.conn).then(function(stat) {
+                dbConn.collection('statistics').insert({
+                  url: log.domain,
+                  count: 1
+                }, function(err, result) {
+                  if (err) throw new Error(err);
+                  if (result.result.ok > 0) {
                     console.log('- ' + log.domain + ' - Count: 1');
-                    logLinesSequenceNext();
-                  }).error(function(err) { db.handleError(err); });
+                  } else {
+                    console.log('Nothing inserted.');
+                  }
+                  logLinesSequenceNext();
+                });
               }
             });
-          }).error(function(err) { db.handleError(err); });
+        });
       });
     }
   });

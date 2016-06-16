@@ -1,21 +1,9 @@
-'use strict';
+var MongoClient = require('mongodb').MongoClient;
+var Promise = require('bluebird');
 
-var r = require('rethinkdb');
-
-var db = r.connect({
-  host: '45.79.167.199',
-  db: 'humanitybox',
-  port: 28015
-}).then(function(conn) {
-  db.conn = conn;
-  db.handleError = function(err, res) {
-    if (res) res.send(500);
-    console.log(err);
-    throw err;
-  };
-}).error(function(err) {
-  console.log(err);
-  throw err;
+module.exports = new Promise(function(resolve, reject) {
+  MongoClient.connect(process.env.MONGO_URL || 'mongodb://localhost/humanitybox', function(err, conn) {
+    if (err) throw err;
+    resolve(conn);
+  });
 });
-
-module.exports = db;
