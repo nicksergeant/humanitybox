@@ -32,9 +32,9 @@ function downloadLogFile(key) {
       .on('data', function (data) { processLogFile(data, key); })
       .on('error', function (err) { throw err; })
       .on('end', function () {
-        // s3Logs.del(key).on('response', function(res){
+        s3Logs.del(key).on('response', function(res){
           deferred.resolve();
-        // }).end(); 
+        }).end(); 
       });
   });
   return deferred.promise;
